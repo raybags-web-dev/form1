@@ -2,6 +2,10 @@
   --transition: all linear 0.4s;
   --radius: 0.5rem;
   --red-clr: rgb(83, 14, 14);
+  --box-shadow: 0 0 0 12px rgba(255, 0, 0, 0.5);
+  --box-light-shadow: 0px 0px 5px 1px #ffffff;
+  --box-light-shadow-inner: inset 3px 3px 15px 1px #6b2323;
+  --blur-100-fullon: blur(100px);
 }
 
 body {
@@ -9,6 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 #form_container {
   display: flex;
@@ -30,6 +35,8 @@ body {
 form {
   width: 100%;
   padding: 3rem;
+  box-shadow: var(--box-light-shadow-inner) !important;
+  backdrop-filter: var(--blur-100-fullon);
 }
 
 .upload-btn-wrapper {
@@ -75,7 +82,12 @@ form {
   opacity: 0.5;
   color: #ffffff;
   margin-top: -10%;
-  text-shadow: 1px 0px 0 #020202, 1px 0px 5px #050505;
+  border-radius: var(--radius);
+  text-shadow: 1px 0px 0 #020202, 1px 0px 5px #f30d0d;
+  box-shadow: 4px -3px 1px #a74040;
+}
+.btn-lg {
+  box-shadow: inset 0px 0px 13px #000000 !important;
 }
 
 /* ============================= */
@@ -119,30 +131,35 @@ form {
 .name-email-container {
   flex: 1 1 100%;
 }
+.inner-container-form {
+  margin-top: 5%;
+}
+textarea:focus-within {
+  height: 100% !important;
+  box-shadow: var(--box-light-shadow-inner);
+}
 @media screen and (max-width: 792px) {
   .contact-form {
     display: flex;
     flex-direction: column;
     width: 90vw;
-    height: 75vh;
-    /* -webkit-backdrop-filter: blur(300px); */
-    /* backdrop-filter: blur(300px); */
+    height: 80vh;
     padding-top: 5%;
     text-align: center;
     transition: var(--transition);
     border-radius: var(--radius);
     box-shadow: 2px 2px 14px rgb(0, 0, 0, 0.5);
   }
+
   input {
     height: 5rem !important;
   }
   .name-email-container {
     flex: 1 1 100%;
   }
-  input:focus-within,
-  textarea:focus {
-    font-size: 2rem;
-    transition: var(--transition);
+
+  .inner-container-form {
+    margin-top: 5%;
   }
 }
 
@@ -171,8 +188,35 @@ label {
   color: var(--red-clr);
 }
 
-input:focus-within,
-textarea:focus {
+input,
+textarea {
+  position: relative;
   font-size: 2rem;
   transition: var(--transition);
+}
+.text-box::before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  transition: var(--transition);
+  border-radius: var(--radius);
+  backdrop-filter: var(--blur-100-fullon);
+  box-shadow: 2px 2px 14px rgba(68, 14, 14, 0.5);
+  z-index: -1;
+}
+.input-box::before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  backdrop-filter: var(--blur-100-fullon);
+  box-shadow: 2px 2px 14px rgba(68, 14, 14, 0.5);
+  z-index: -1;
 }
